@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "863970500597",
+    "project_id": "mycartracker-9c5a9",
+    "storage_bucket": "mycartracker-9c5a9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863970500597:android:be70e72aa05b9465360abc",
+        "android_client_info": {
+          "package_name": "com.infyntrix.myCarApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-wpD5wnFN-x2jG6c0upyFpln8QnpWeg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
