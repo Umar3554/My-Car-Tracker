@@ -8,6 +8,7 @@ import { AuthModule } from './user/auth/auth.module';
 import { MomentModule } from '@ccmos/nestjs-moment';
 import { MulterModule } from '@nestjs/platform-express';
 import { MulterConfigService } from './uploader/multer.config';
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { MulterConfigService } from './uploader/multer.config';
     MulterModule.registerAsync({ useClass: MulterConfigService }),
     UserModule,
     AuthModule,
+    LocationModule,
   ],
   controllers: [],
   providers: [IsUniqueConstraint],

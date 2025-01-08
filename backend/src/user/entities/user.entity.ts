@@ -4,12 +4,15 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserRoles } from '../user-roles.enum';
+import { Location } from '../../location/entity/location.entity';
 
 @Entity({ name: 'users' })
 @Unique(['email', 'deletedAt'])
@@ -48,4 +51,6 @@ export class User extends BaseEntity {
     const hash = await bcrypt.hash(password, this.salt);
     return hash === this.password;
   }
+  @OneToOne(() => Location, (location) => location.user, { cascade: true })
+  location: Location;
 }
