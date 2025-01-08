@@ -23,11 +23,9 @@ export class LocationService {
       },
     });
     if (locationExists) {
-      console.log('old:', locationExists);
       const { longitude, latitude, radius } = locationDto;
       locationExists.coordinates = `POINT(${longitude} ${latitude})`;
       locationExists.radius = radius;
-      console.log('new:', locationExists);
       return await locationExists.save();
     } else {
       return await this.locationRepository.addLocation(locationDto, userId);
