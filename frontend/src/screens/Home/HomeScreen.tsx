@@ -83,22 +83,22 @@ const HomeScreen = () => {
 
     requestLocationPermission();
 
-    // Establish socket connection
-    const socket = io("https://your-backend-api.com"); // Replace with your backend socket URL
+    // // Establish socket connection
+    // const socket = io("https://your-backend-api.com"); // Replace with your backend socket URL
 
-    socket.on(
-      "carLocationUpdate",
-      (location: { latitude: any; longitude: any }) => {
-        setCarLocation({
-          latitude: location.latitude,
-          longitude: location.longitude,
-        });
-      }
-    );
+    // socket.on(
+    //   "carLocationUpdate",
+    //   (location: { latitude: any; longitude: any }) => {
+    //     setCarLocation({
+    //       latitude: location.latitude,
+    //       longitude: location.longitude,
+    //     });
+    //   }
+    // );
 
-    return () => {
-      socket.disconnect();
-    };
+    // return () => {
+    //   socket.disconnect();
+    // };
   }, []);
 
   // const handleMarkerDrag = (e: {

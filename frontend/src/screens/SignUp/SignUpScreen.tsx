@@ -5,10 +5,12 @@ import { NavigationProp, useNavigation } from "@react-navigation/native";
 import DynamicForm from "../../components/DynamicForm/DynamicForm";
 import authStyles from "../../styles/authStyles";
 import { RootStackParamList2 } from "../../navigation/AppNavigator";
+import Config from "react-native-config";
+const API_URL = Config.API_URL;
 
 const SignUpScreen = () => {
   const api = axios.create({
-    baseURL: "http://192.168.1.91:13000", // Use your local backend IP and port
+    baseURL: "http://192.168.1.94:13000", // Use your local backend IP and port
   });
 
   const navigation = useNavigation<NavigationProp<RootStackParamList2>>();
@@ -71,6 +73,7 @@ const SignUpScreen = () => {
       values.carNumber
     ) {
       try {
+        console.log(api);
         // Send data to backend API
         const response = await api.post("/auth/signup", {
           name: values.name,

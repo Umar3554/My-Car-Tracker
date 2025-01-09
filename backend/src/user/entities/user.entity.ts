@@ -5,6 +5,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   Unique,
@@ -13,7 +14,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { UserRoles } from '../user-roles.enum';
 import { Location } from '../../location/entity/location.entity';
-
+import { Notification } from '../../notification/entity/notification.entity';
 @Entity({ name: 'users' })
 @Unique(['email', 'deletedAt'])
 export class User extends BaseEntity {
@@ -25,9 +26,9 @@ export class User extends BaseEntity {
   email: string;
   @Column({ select: false })
   password: string;
-  @Column({ select: false })
+  @Column({})
   carName: string;
-  @Column({ select: false })
+  @Column({})
   carNumber: string;
   @Column({ select: false })
   salt: string;
@@ -53,4 +54,6 @@ export class User extends BaseEntity {
   }
   @OneToOne(() => Location, (location) => location.user, { cascade: true })
   location: Location;
+  @OneToMany(() => Notification, (notification) => notification.user)
+  notifications: Notification[];
 }

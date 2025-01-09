@@ -52,6 +52,6 @@ export class LocationController {
   ): Promise<{ message: string }> {
     const pingLocation =
       await this.locationService.pingLocation(pingLocationDto);
-    return { message: 'Car location added' };
+    return { message: 'Car location pinged successfully' };
   }
 }

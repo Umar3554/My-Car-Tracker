@@ -10,13 +10,15 @@ import { LocationDto } from './dto/location.dto';
 import { User } from 'src/user/entities/user.entity';
 import { PingLocationDto } from './dto/pingLocation.dto';
 import { UserRepository } from 'src/user/user.repository';
-
+import { SocketGateway } from '../socket/socket.gateway';
+import { Notification } from 'src/notification/entity/notification.entity';
 @Injectable()
 export class LocationRepository extends Repository<Location> {
   private logger = new Logger('LocationRepository');
   constructor(
     private dataSource: DataSource,
     private readonly userRepository: UserRepository,
+    private readonly socketGateway: SocketGateway,
   ) {
     super(Location, dataSource.createEntityManager());
   }
@@ -86,16 +88,20 @@ export class LocationRepository extends Repository<Location> {
         { latitude: savedLatitude, longitude: savedLongitude },
         { latitude, longitude },
       );
-      console.log('From Database', savedLatitude, savedLongitude);
-      console.log('From Api', latitude, longitude);
+      const savedRadiusInMeters = radius * 1609.34;
       // Check if the pinged location is outside the radius
-      if (distance > radius) {
+      if (distance > savedRadiusInMeters) {
         this.logger.warn(`User ${user.id} is outside the allowed area.`);
-        // Send an alert to the user via socket
-        // this.socketService.alertUser(
-        //   user.id,
-        //   'You are outside the allowed area!',
-        // );
+        this.logger.warn(
+          `Car is outside the radius! Distance: ${distance} meters`,
+        );
+        const message = `Your car is outside the allowed radius! Distance: ${Math.round(distance / 1609.34)} miles`;
+        this.socketGateway.emitLocationAlert(user.id);
+        const notification = new Notification();
+        console.log(user);
+        notification.alert = `Your car ${user.carName}:${user.carNumber} is outside the allowed radius! Distance: ${Math.round(distance / 1609.34)} miles`;
+        notification.user = user;
+        await notification.save();
       } else {
         this.logger.log(`User ${user.id} is within the allowed area.`);
       }

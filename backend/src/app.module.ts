@@ -9,6 +9,7 @@ import { MomentModule } from '@ccmos/nestjs-moment';
 import { MulterModule } from '@nestjs/platform-express';
 import { MulterConfigService } from './uploader/multer.config';
 import { LocationModule } from './location/location.module';
+import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { LocationModule } from './location/location.module';
     UserModule,
     AuthModule,
     LocationModule,
+    NotificationModule,
   ],
   controllers: [],
   providers: [IsUniqueConstraint],

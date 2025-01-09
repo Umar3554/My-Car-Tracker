@@ -2,7 +2,7 @@ import React from "react";
 import AppNavigator from "./src/navigation/AppNavigator";
 import { auth } from "./src/api/firebaseConfig"; // Firebase Auth
 import { onAuthStateChanged } from "firebase/auth";
-
+import SocketService from "./src/socket/socket.gateway";
 const App: React.FC = () => {
   React.useEffect(() => {
     // Example: Check if a user is logged in
@@ -13,7 +13,9 @@ const App: React.FC = () => {
         console.log("No user is logged in");
       }
     });
-
+    SocketService.listenForLocationAlert((data) => {
+      console.log(data);
+    });
     // Cleanup the subscription
     return () => unsubscribe();
   }, []);
