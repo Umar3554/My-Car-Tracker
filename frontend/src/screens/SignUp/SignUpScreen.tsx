@@ -38,6 +38,18 @@ const SignUpScreen = () => {
       placeholder: "Confirm Password",
       label: "Confirm Password",
     },
+    {
+      type: "text",
+      name: "carName",
+      placeholder: "Enter Car Name",
+      label: "Car Name",
+    },
+    {
+      type: "text",
+      name: "carNumber",
+      placeholder: "Enter Car Number",
+      label: "Car Number",
+    },
 
     { type: "button", name: "submit", label: "Sign Up" },
   ];
@@ -51,13 +63,21 @@ const SignUpScreen = () => {
       return;
     }
 
-    if (values.name && values.email && values.password) {
+    if (
+      values.name &&
+      values.email &&
+      values.password &&
+      values.carName &&
+      values.carNumber
+    ) {
       try {
         // Send data to backend API
         const response = await api.post("/auth/signup", {
           name: values.name,
           email: values.email,
           password: values.password,
+          carName: values.carName,
+          carNumber: values.carNumber,
         });
         if (response.status === 201) {
           // On success, show message

@@ -10,7 +10,7 @@ import {
 import MapView, { Circle, Marker } from "react-native-maps";
 import Slider from "@react-native-community/slider";
 import Geolocation from "react-native-geolocation-service";
-import io from "socket.io-client"; // Import socket.io-client
+import io from "socket.io-client";
 import homeStyles from "../../styles/homeStyles";
 
 const HomeScreen = () => {
