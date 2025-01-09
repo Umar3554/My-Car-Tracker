@@ -37,9 +37,11 @@ export class AuthController {
   }
 
   @Post('/signin')
-  async signIn(
-    @Body() signInDto: SignInDto,
-  ): Promise<{ accessToken: string; userRole: UserRoles; message: string }> {
+  async signIn(@Body() signInDto: SignInDto): Promise<{
+    accessToken: string;
+    userRole: UserRoles;
+    message: string;
+  }> {
     try {
       return await this.authService.signIn(signInDto);
     } catch (error) {

@@ -28,7 +28,6 @@ export const uploader = {
   fileFilter: (req, file, cb) => {
     const fieldName = file.fieldname;
     const allowedMimeTypes = validAllFileMimeTypes[fieldName];
-    console.log(allowedMimeTypes, allowedMimeTypes.includes(file.mimetype));
     allowedMimeTypes == '' || allowedMimeTypes.includes(file.mimetype)
       ? cb(null, true)
       : cb(
