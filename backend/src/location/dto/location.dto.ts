@@ -1,12 +1,12 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
 export class LocationDto {
   @IsNotEmpty()
-  @IsString()
-  longitude: string;
+  @IsNumber()
+  longitude: number;
   @IsNotEmpty()
-  @IsString()
-  latitude: string;
+  @IsNumber()
+  latitude: number;
   @IsNotEmpty()
   @IsNumber()
   radius: number;

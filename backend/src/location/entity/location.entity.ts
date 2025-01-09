@@ -15,8 +15,11 @@ import {
 export class Location extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column({ type: 'point', nullable: false })
-  coordinates: string;
+  @Column({ type: 'decimal', precision: 10, scale: 6 })
+  latitude: number;
+
+  @Column({ type: 'decimal', precision: 10, scale: 6 })
+  longitude: number;
   @Column()
   radius: number;
 
@@ -30,7 +33,6 @@ export class Location extends BaseEntity {
   deletedAt?: Date;
   @OneToOne(() => User, (user) => user.location, {
     onDelete: 'CASCADE',
-    eager: true,
   })
   @JoinColumn({ name: 'userId' }) // Specifies the foreign key column
   user: User;

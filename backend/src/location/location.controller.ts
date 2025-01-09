@@ -14,6 +14,7 @@ import {
 import { LocationService } from './location.service';
 import { LocationDto } from './dto/location.dto';
 import { AuthGuard } from './guards/auth/auth.guard';
+import { PingLocationDto } from './dto/pingLocation.dto';
 // import { UpdateUserDto } from './dto/update-user.dto';
 // import { FilesFieldInterceptor } from 'src/uploader/files-field.interceptor';
 // import { FileInterceptor } from '@nestjs/platform-express';
@@ -43,6 +44,14 @@ export class LocationController {
       locationDto,
       userId,
     );
+    return { message: 'Car location added' };
+  }
+  @Post('ping-location')
+  async pingLocation(
+    @Body() pingLocationDto: PingLocationDto,
+  ): Promise<{ message: string }> {
+    const pingLocation =
+      await this.locationService.pingLocation(pingLocationDto);
     return { message: 'Car location added' };
   }
 }
