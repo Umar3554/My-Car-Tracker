@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { LocationRepository } from './location.repository';
 import { LocationDto } from './dto/location.dto';
+import { PingLocationDto } from './dto/pingLocation.dto';
 
 @Injectable()
 export class LocationService {
@@ -24,14 +25,17 @@ export class LocationService {
     });
     if (locationExists) {
       const { longitude, latitude, radius } = locationDto;
-      locationExists.coordinates = `POINT(${longitude} ${latitude})`;
+      locationExists.longitude = longitude;
+      locationExists.latitude = latitude;
       locationExists.radius = radius;
       return await locationExists.save();
     } else {
       return await this.locationRepository.addLocation(locationDto, userId);
     }
   }
-
+  async pingLocation(pingLocationDto: PingLocationDto) {
+    return await this.locationRepository.pingLocation(pingLocationDto);
+  }
   async remove(id: string) {
     return await this.locationRepository.softDelete(id);
   }
