@@ -6,10 +6,11 @@ import DynamicForm from "../../components/DynamicForm/DynamicForm";
 import { RootStackParamList2 } from "../../navigation/AppNavigator";
 import authStyles from "../../styles/authStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import Config from "react-native-config";
+const API_URL = "http://192.168.1.94:13000";
 const LoginScreen = () => {
   const api = axios.create({
-    baseURL: "http://192.168.1.91:13000", // Use your local backend IP and port
+    baseURL: API_URL, // Use your local backend IP and port
   });
 
   const navigation = useNavigation<NavigationProp<RootStackParamList2>>();
